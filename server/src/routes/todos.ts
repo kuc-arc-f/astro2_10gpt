@@ -71,14 +71,14 @@ console.log(req.input);
    *
    * @return
    */   
-  deleteTask: publicProcedure
+  delete: publicProcedure
   .input((val: unknown) => {
     if (typeof val === 'string') return val;
     throw new Error(`Invalid input: ${typeof val}`);
   })
   .mutation(async (req) => {
 console.log("input=", req.input);
-    const result = await LibTask.deleteTask(Number(req.input));
+    const result = await LibTodo.deleteTodoById(Number(req.input));
 //console.log(result);
     return result;
   }),  

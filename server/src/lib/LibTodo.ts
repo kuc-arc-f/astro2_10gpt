@@ -121,17 +121,16 @@ console.log(data);
   *
   * @return
   */  
-  deleteTask :async function(id: number){
+  deleteTodoById :async function(id: number)
+  {
     try {
   console.log(id);
-//  return;
-      const text = `
-      DELETE FROM public."Task" where id = $1
-      RETURNING *
-      `;
       const client = LibPg.getClient();
-      const values = [id]
-      const result = await LibPg.execute(text, values);
+      const query = {
+        text: 'DELETE FROM todos WHERE id = $1 RETURNING *',
+        values: [id],
+      };      
+      const result = await client.query(query);
       client.end();
 //console.log(result);
       return {
@@ -139,7 +138,7 @@ console.log(data);
       };
     } catch (err) {
       console.error(err);
-      throw new Error('Error , deleteTask:' +err);
+      throw new Error('Error , deleteTodoById:' +err);
     }        
   },             
 }

@@ -1,6 +1,25 @@
 import LibCrud from '../../lib/LibCrud';
+import LibConfig from '../../lib/LibConfig';
+import { trpc } from '../../utils/trpc';
 
 const Crud = {
+  /**
+   * delete:
+   * @param key: any
+   *
+   * @return
+   */   
+  delete : async function(id: number) : Promise<any>
+  {
+    try{
+      let item = {};
+      item = await trpc.todo.delete.mutate(String(id));
+console.log(item);
+      return item;
+    } catch (e) {
+      console.error(e);
+    }
+  },  
   /**
   * startProc
   * @param
@@ -22,9 +41,9 @@ const Crud = {
 console.log("id=", id);
       const button: any = document.querySelector('#btn_delete');
       button.addEventListener('click', async () => {
-        const res = await LibCrud.delete(Number(id));
+        const res = await this.delete(Number(id));
 console.log(res);
-        window.location.href = '/trpc';	
+        window.location.href = '/gpt';	
       }); 
     } catch (e) {
       console.error(e);
