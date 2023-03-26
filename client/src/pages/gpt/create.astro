@@ -1,0 +1,60 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import LibCrud from '../../lib/LibCrud';
+
+export type Post = {
+  id: number;
+  name: string;
+};
+//
+const items: Post[]  = await LibCrud.getList();
+console.log(items);
+---
+
+<Layout title="Welcome to Astro.">
+	<main class="container">
+		<a href={`/gpt`}>[ Back ]</a>
+		<hr />		
+		<h1>todo-Create</h1>
+		<p class="instructions">
+		</p>
+		<hr />
+		<div class="col-sm-6">
+			<input type="hidden" name="user_id" value="1">
+			<label for="title">タイトル</label>
+			<input type="text" name="title" id="title" class="form-control" />
+			<label for="description">詳細</label>
+			<textarea name="description" id="description" class="form-control"></textarea>
+			<label for="priority">優先度</label>
+			<select name="priority" id="priority">
+			  <option value="low">低</option>
+			  <option value="medium">中</option>
+			  <option value="high">高</option>
+			</select>
+			<label for="due_date">期限</label>
+			<input type="date" name="due_date" id="due_date" class="form-control">
+			<label for="category">カテゴリ</label>
+			<input type="text" name="category" id="category" class="form-control">
+			<label for="completed">完了状態</label>
+			<select name="completed" id="completed">
+			  <option value="0">未完了</option>
+			  <option value="1">完了済み</option>
+			</select>
+			<hr />
+			<button id="btn_save" class="btn btn-primary">Save
+			</button>
+		</div>	
+	</main>
+</Layout>
+<!-- -->
+<style>
+</style>
+<!-- -->
+<script src="./CrudCreate.ts"></script>
+
+<!--
+<input type="submit" value="登録">
+<input type="text" name="title" id="title" class="form-control"
+/><br />	
+<button id="btn_save" class="btn btn-primary">Save</button>
+ -->

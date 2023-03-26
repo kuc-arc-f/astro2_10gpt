@@ -1,0 +1,44 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { trpc } from '../../utils/trpc';
+
+console.log("#trpc/index");
+//
+const hello = await trpc.hello.query();
+console.log(hello);	
+const taskList = await trpc.todo.getList.query();
+console.log("#taskList");
+console.log(taskList);
+---
+
+<Layout title="Welcome to Astro.">
+	<main class="container">
+		<a href={`/`}>[ Top ]</a>
+		<hr />		
+		<a href={`/gpt/create`}>[ Add ]</a>
+		<hr />
+		<h1>GPT</h1>
+		<hr />
+		<ul>
+		{
+		taskList.map((item) => (
+			<li><h3>{item.title}</h3>
+				ID: {item.id}
+				<a href={`/gpt/show/${item.id}`} class="btn btn-sm btn-outline-primary"
+				>Show</a>
+				<hr />
+			</li>
+		))
+		}
+		</ul>		
+	</main>
+</Layout>
+<!-- -->
+<style>
+</style>
+<!-- -->
+<script src="./Test.ts"></script>
+
+<!--
+
+ -->

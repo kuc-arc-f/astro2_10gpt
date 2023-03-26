@@ -1,0 +1,35 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import LibCrud from '../../../lib/LibCrud';
+import type { Post } from '../index.astro';
+
+//
+const { id } = Astro.params;
+console.log(id);
+let item: any = await LibCrud.get(Number(id));
+console.log(item);
+---
+
+<!-- -->
+<style>
+</style>
+
+<!-- MarkUp -->
+<Layout title="Welcome to Astro.">
+	<main class="container">
+		<a class="btn btn-outline-primary" href={`/gpt`}>Back</a>
+		<hr />		
+		<h1>Todo Show</h1>
+		<hr />
+		<p>Id:{id}</p>
+		<p>title: {item.title}</p>
+		<hr />
+		<input type="hidden" value={id} id="item_id" />
+		<button id="btn_delete" class="btn btn-danger">Delete</button>
+	</main>
+</Layout>
+<!-- -->
+<script src="../CrudShow.ts"></script>
+
+<!--
+ -->
